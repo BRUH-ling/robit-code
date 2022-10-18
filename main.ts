@@ -2,16 +2,15 @@ radio.onReceivedNumber(function (receivedNumber) {
     if (receivedNumber == 1) {
         Forward()
         Forward2()
-    }
-    if (receivedNumber == 2) {
+    } else if (receivedNumber == 2) {
         Backward()
         Backward2()
-    }
-    if (receivedNumber == 3) {
+    } else if (receivedNumber == 3) {
         Backward()
-    }
-    if (receivedNumber == 4) {
+    } else if (receivedNumber == 4) {
         Backward2()
+    } else {
+        Nothing()
     }
 })
 function Forward () {
@@ -30,6 +29,9 @@ function servo () {
     pins.digitalWritePin(DigitalPin.P1, 0)
     Distance = pins.pulseIn(DigitalPin.P2, PulseValue.High) / 58
 }
+function Nothing () {
+    basic.showIcon(IconNames.Yes)
+}
 function Forward2 () {
     pins.servoSetPulse(AnalogPin.P13, 1300)
     control.waitMicros(20000)
@@ -43,4 +45,5 @@ radio.setGroup(1)
 Distance = 0
 basic.forever(function () {
     basic.showIcon(IconNames.Happy)
+    servo()
 })
